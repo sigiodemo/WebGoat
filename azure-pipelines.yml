@@ -1,0 +1,26 @@
+# Java
+
+
+trigger:
+- master
+
+pool:
+  name: MyAgentPool
+  demands:
+   - agent.name -equals nuc
+steps:
+
+- task: CmdLine@2
+  inputs:
+    script: 'mvn clean compile -DskipTests'
+
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
