@@ -91,6 +91,11 @@ pipeline {
         }
       }
     }
+    stage('Test') {
+      steps '''
+        /usr/bin/mvn dependency:tree -T1
+      '''
+    }
 
     stage('SAST - Coverity on Polaris') {
       when {
