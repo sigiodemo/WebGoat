@@ -121,7 +121,7 @@ pipeline {
           echo "Running BlackDuck"
           rm -fr /tmp/detect7.sh
           curl -s -L https://detect.synopsys.com/detect7.sh > /tmp/detect7.sh
-          bash /tmp/detect7.sh --blackduck.url="${_BLACKDUCK_SERVER_URL}" --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" --detect.project.name="${PROJECT}" --detect.project.version.name="${VERSION}" --blackduck.trust.cert=true
+          bash /tmp/detect7.sh --blackduck.url="${_BLACKDUCK_SERVER_URL}" --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" --detect.project.name="${PROJECT}" --detect.project.version.name="${VERSION}" --blackduck.trust.cert=true --detect.maven.build.command=`which mvn`
         '''
       }
     }
