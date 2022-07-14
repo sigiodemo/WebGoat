@@ -91,13 +91,6 @@ pipeline {
         }
       }
     }
-    stage('Test') {
-      steps {
-        sh '''
-          /usr/bin/mvn dependency:tree -T1
-        '''
-      }
-    }
 
     stage('SAST - Coverity on Polaris') {
       when {
@@ -128,7 +121,7 @@ pipeline {
           echo "Running BlackDuck"
           rm -fr /tmp/detect7.sh
           curl -s -L https://detect.synopsys.com/detect7.sh > /tmp/detect7.sh
-          bash /tmp/detect7.sh --blackduck.url="${_BLACKDUCK_SERVER_URL}" --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" --detect.project.name="${PROJECT}" --detect.project.version.name="${VERSION}" --blackduck.trust.cert=true --detect.maven.build.command=`which mvn`
+          bash /tmp/detect7.sh --blackduck.url="${_BLACKDUCK_SERVER_URL}" --blackduck.api.token="${BLACKDUCK_ACCESS_TOKEN}" --detect.project.name="${PROJECT}" --detect.project.version.name="${VERSION}" --blackduck.trust.cert=true --detect.maven.path=`which mvn`
         '''
       }
     }
